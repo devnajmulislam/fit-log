@@ -12,6 +12,7 @@ export interface IGymSteps {
   rating: number
   description: string
   instructions: string[]
+  calories?: number;
 }
 
 
