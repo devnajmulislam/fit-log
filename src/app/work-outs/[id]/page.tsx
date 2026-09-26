@@ -1,4 +1,5 @@
 import AddTodaysPlanBtn from "@/components/AddTodaysPlanBtn";
+import SaveForLtrBtn from "@/components/SaveForLtrBtn";
 import { getAllGymSteps } from "@/lib/gymSteps";
 import { IGymSteps } from "@/types/gymSteps.type";
 import { Bookmark, Calendar } from "lucide-react";
@@ -139,10 +140,7 @@ const WorkoutDetailPage = async ({ params }: IWorkoutDetailPageProps) => {
           <div className="flex flex-wrap items-center gap-4 pt-2">
 <AddTodaysPlanBtn workOut={workOut}/>
 
-            <button className="btn border border-slate-700 bg-[#14181f] hover:bg-slate-800 text-white font-medium normal-case rounded-xl px-6 flex items-center gap-2">
-              <Bookmark className="w-4 h-4" />
-              Save for later
-            </button>
+<SaveForLtrBtn workOut={workOut}/>
           </div>
         </div>
       </div>
