@@ -3,7 +3,7 @@ import { WorkoutsContext } from "@/context/WorkoutsProvider";
 import { IGymSteps } from "@/types/gymSteps.type";
 import { Calendar } from "lucide-react";
 import { useContext } from "react";
-import { toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 
 const AddTodaysPlanBtn = ({ workOut }: { workOut: IGymSteps }) => {
   // Get data throug Context API
@@ -12,7 +12,18 @@ const AddTodaysPlanBtn = ({ workOut }: { workOut: IGymSteps }) => {
   // Button click to action
   const handleTodaysPlanBtn = () => {
     setTodaysPlan([...todaysPlan, workOut]);
-    toast.success(`You have added "${workOut.name}" on today's plan.`);
+    // Show notification via Toaster
+    toast.success(`Added "${workOut.name}" to today's plan.`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
   };
 
   return (
@@ -27,8 +38,3 @@ const AddTodaysPlanBtn = ({ workOut }: { workOut: IGymSteps }) => {
 };
 
 export default AddTodaysPlanBtn;
-
-
-
-
-
