@@ -1,24 +1,25 @@
+import AddTodaysPlanBtn from "@/components/AddTodaysPlanBtn";
 import { getAllGymSteps } from "@/lib/gymSteps";
 import { IGymSteps } from "@/types/gymSteps.type";
 import { Bookmark, Calendar } from "lucide-react";
 import Image from "next/image";
 
-interface IWorkoutDetailPageProps{
-params: Promise<{
-    id:string;
-}>;
+interface IWorkoutDetailPageProps {
+  params: Promise<{
+    id: string;
+  }>;
 }
 
-
-const WorkoutDetailPage = async({params}:IWorkoutDetailPageProps) => {
-    const {id} = await params;
+const WorkoutDetailPage = async ({ params }: IWorkoutDetailPageProps) => {
+  const { id } = await params;
   const allWorkOuts = await getAllGymSteps();
-const workOut = allWorkOuts.find((workOut:IGymSteps)=> String(workOut.id) === String(id));
-console.log(workOut, 'got Data')
-return (
-    <div className="min-h-screen bg-[#0d0f12] text-slate-100 p-4 md:p-8 lg:p-12 flex justify-center items-center">
+  const workOut = allWorkOuts.find(
+    (workOut: IGymSteps) => String(workOut.id) === String(id),
+  );
+  // console.log(workOut, "got Data");
+  return (
+    <div className="bg-[#0d0f12] text-slate-100 p-4 md:p-8 lg:p-12 flex justify-center items-center">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-        
         {/* Left Column: Image */}
         <div className="relative aspect-square w-full rounded-3xl overflow-hidden shadow-2xl bg-[#16191e]">
           <Image
@@ -32,7 +33,6 @@ return (
 
         {/* Right Column: Workout Details */}
         <div className="flex flex-col gap-6">
-          
           {/* Header Title & Description */}
           <div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-wider uppercase text-white mb-3">
@@ -79,18 +79,14 @@ return (
               <span className="text-slate-400 font-medium uppercase tracking-wider text-xs">
                 Sets
               </span>
-              <span className="font-semibold text-white">
-                {workOut.sets}
-              </span>
+              <span className="font-semibold text-white">{workOut.sets}</span>
             </div>
 
             <div className="flex justify-between items-center px-5 py-3.5">
               <span className="text-slate-400 font-medium uppercase tracking-wider text-xs">
                 Reps
               </span>
-              <span className="font-semibold text-white">
-                {workOut.reps}
-              </span>
+              <span className="font-semibold text-white">{workOut.reps}</span>
             </div>
 
             <div className="flex justify-between items-center px-5 py-3.5">
@@ -115,9 +111,7 @@ return (
               <span className="text-slate-400 font-medium uppercase tracking-wider text-xs">
                 Rating
               </span>
-              <span className="font-semibold text-white">
-                {workOut.rating}
-              </span>
+              <span className="font-semibold text-white">{workOut.rating}</span>
             </div>
           </div>
 
@@ -128,7 +122,10 @@ return (
             </h2>
             <ol className="space-y-3 list-none">
               {workOut.instructions.map((step, idx) => (
-                <li key={idx} className="flex gap-3 text-slate-300 text-sm md:text-base leading-relaxed">
+                <li
+                  key={idx}
+                  className="flex gap-3 text-slate-300 text-sm md:text-base leading-relaxed"
+                >
                   <span className="font-semibold text-slate-400 shrink-0">
                     {idx + 1}.
                   </span>
@@ -140,20 +137,16 @@ return (
 
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center gap-4 pt-2">
-            <button className="btn border-none bg-[#ccff00] hover:bg-[#b8e600] text-black font-bold normal-case rounded-xl px-6 flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              Add to today's plan
-            </button>
+<AddTodaysPlanBtn workOut={workOut}/>
 
             <button className="btn border border-slate-700 bg-[#14181f] hover:bg-slate-800 text-white font-medium normal-case rounded-xl px-6 flex items-center gap-2">
               <Bookmark className="w-4 h-4" />
               Save for later
             </button>
           </div>
-
         </div>
       </div>
-    </div>
+    </div> 
   );
 };
 
