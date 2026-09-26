@@ -1,8 +1,8 @@
+import GymCard from "@/components/GymCard";
 import { getAllGymSteps } from "@/lib/gymSteps";
 import { IGymSteps } from "@/types/gymSteps.type";
-import GymCard from "./GymCard";
 
-const TheLibrary = async () => {
+const WorkoutsPage = async () => {
   const gymCards = await getAllGymSteps();
 
   return (
@@ -30,4 +30,4 @@ const TheLibrary = async () => {
   );
 };
 
-export default TheLibrary;
+export default WorkoutsPage;

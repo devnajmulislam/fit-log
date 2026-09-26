@@ -1,5 +1,6 @@
 import BannerImg from "@/assets/banner.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -27,9 +28,9 @@ const Banner = () => {
 
           {/* Action Button (using daisyUI button classes) */}
           <div className="pt-2">
-            <button className="btn bg-[#a8f000] hover:bg-[#92d400] text-black font-extrabold border-none uppercase tracking-wider text-sm px-6 rounded-lg transition-transform hover:scale-105 active:scale-95">
+            <Link href="/" className="btn bg-[#a8f000] hover:bg-[#92d400] text-black font-extrabold border-none uppercase tracking-wider text-sm px-6 rounded-lg transition-transform hover:scale-105 active:scale-95">
               Browse Workouts
-            </button>
+            </Link>
           </div>
         </div>
 
