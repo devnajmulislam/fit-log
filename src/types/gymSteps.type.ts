@@ -15,4 +15,5 @@ export interface IGymSteps {
 }
 
 
+export type TabType = "todaysPlan" | "saved";
 export type SortOption = "duration" | "caloriesBurned" | "rating";

@@ -12,7 +12,7 @@ const Footer = () => {
           >
             <path d="M6 5a1 1 0 0 1 1 1v12a1 1 0 0 1-2 0V6a1 1 0 0 1 1-1zm12 0a1 1 0 0 1 1 1v12a1 1 0 0 1-2 0V6a1 1 0 0 1 1-1zM3 8a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1zm18 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1zM7 11h10v2H7z" />
           </svg>
-          <span className="font-extrabold tracking-wider text-xl uppercase text-white">
+          <span className="font-extrabold text-xl uppercase text-white">
             FITLOG
           </span>
         </div>

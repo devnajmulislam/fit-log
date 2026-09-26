@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fit Log
 
-## Getting Started
+Fit Log is a simple gym workout management web application built with Next.js. It allows users to browse different exercises, view workout details, add exercises to today's workout plan, and save workouts for later.
 
-First, run the development server:
+## Technologies Used
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Context API
+* React Toastify
+* Next.js Image
+* Next.js Link
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Workout Library
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The **Workout Library** displays different gym exercises in a responsive card layout. Workout data is loaded using the `getAllGymSteps()` function from `@/lib/gymSteps`.
 
-## Learn More
+### 2. Workout Details
 
-To learn more about Next.js, take a look at the following resources:
+Users can open a specific workout to see its complete details, including:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* Workout name
+* Description
+* Muscle groups
+* Equipment
+* Difficulty
+* Sets and reps
+* Duration
+* Calories burned
+* Rating
+* Step-by-step instructions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The dynamic workout page uses the workout `id` to find and display the correct exercise.
 
-## Deploy on Vercel
+### 3. Today's Workout Plan
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Users can add workouts to their **Today's Plan**. The plan keeps track of selected exercises and shows useful summary information such as:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Total exercises
+* Total workout minutes
+* Total calories
+
+The workout plan is managed using **Context API** through `WorkoutsProvider`.
+
+### 4. Save Workouts for Later
+
+Users can save exercises for later instead of adding them directly to today's plan. The **My Plan** page has separate tabs for:
+
+* Today's Plan
+* Saved
+
+Users can also remove saved workouts whenever they want.
+
+### 5. Sort, Complete & Manage Workouts
+
+The My Plan page provides several useful workout management features. Users can:
+
+* Sort workouts by duration
+* Sort workouts by calories
+* Sort workouts by rating
+* Mark today's workouts as completed
+* Remove workouts from the plan
+* View workout details
+* Get toast messages when an action is completed
+
+## Project Structure
+
+Some of the main files and components used in the project:
+
+* `app/layout.tsx` — Main layout, Navbar, Footer, Context Provider and ToastContainer
+* `app/page.tsx` — Home page with Banner and Workout Library
+* `work-outs/page.tsx` — Workout library page
+* `work-outs/[id]/page.tsx` — Dynamic workout details page
+* `my-plan/page.tsx` — Today's Plan and Saved workouts
+* `components/` — Reusable UI components such as Navbar, Footer, GymCard and workout buttons
+* `context/WorkoutsProvider.tsx` — Manages workout plan and saved workout state
+* `lib/gymSteps.ts` — Handles workout data
+* `types/gymSteps.type.ts` — TypeScript types for workout data
+
+## About the Project
+
+I built this project to practice building a real-world workout application with **Next.js, TypeScript, Context API, and Tailwind CSS**. While building it, I focused on working with dynamic routes, reusable components, state management, data handling, and responsive UI.
