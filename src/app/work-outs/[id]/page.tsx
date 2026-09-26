@@ -213,7 +213,7 @@ const WorkoutDetailPage = async ({ params }: IWorkoutDetailPageProps) => {
 
             {/* Added explicit string / number types to map parameters */}
             <div className="flex flex-wrap gap-2">
-              {workOut.muscleGroups.map((group: string, index: number) => (
+              {workOut.gopus.map((group: string, index: number) => (
                 <span
                   key={index}
                   className="badge bg-[#ccff00] text-black font-semibold border-none px-4 py-3 rounded-full text-xs"
@@ -290,7 +290,7 @@ const WorkoutDetailPage = async ({ params }: IWorkoutDetailPageProps) => {
               </h2>
               <ol className="space-y-3 list-none">
                 {/* Added explicit string / number types to map parameters */}
-                {workOut.instructions.map((step: string, idx: number) => (
+                {workOut.steps.map((step: string, idx: number) => (
                   <li
                     key={idx}
                     className="flex gap-3 text-slate-300 text-sm md:text-base"

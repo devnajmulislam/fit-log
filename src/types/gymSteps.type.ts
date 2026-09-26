@@ -6,7 +6,7 @@ export interface IGymSteps {
   equipment: string
   difficulty: string
   duration: number
-  caloriesBurned: number
+  caloriesBurned?: number
   sets: number
   reps: string
   rating: number
