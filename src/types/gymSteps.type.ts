@@ -13,3 +13,6 @@ export interface IGymSteps {
   description: string
   instructions: string[]
 }
+
+
+export type SortOption = "duration" | "caloriesBurned" | "rating";

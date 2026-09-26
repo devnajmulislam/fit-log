@@ -3,6 +3,7 @@ import { WorkoutsContext } from "@/context/WorkoutsProvider";
 import { IGymSteps } from "@/types/gymSteps.type";
 import { Calendar } from "lucide-react";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
 const AddTodaysPlanBtn = ({ workOut }: { workOut: IGymSteps }) => {
   // Get data throug Context API
@@ -11,7 +12,7 @@ const AddTodaysPlanBtn = ({ workOut }: { workOut: IGymSteps }) => {
   // Button click to action
   const handleTodaysPlanBtn = () => {
     setTodaysPlan([...todaysPlan, workOut]);
-    alert(`You have added "${workOut.name}" on today's plan.`);
+    toast.success(`You have added "${workOut.name}" on today's plan.`);
   };
 
   return (

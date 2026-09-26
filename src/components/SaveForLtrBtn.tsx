@@ -3,6 +3,7 @@ import { WorkoutsContext } from "@/context/WorkoutsProvider";
 import { IGymSteps } from "@/types/gymSteps.type";
 import { Bookmark, Calendar } from "lucide-react";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
 const SaveForLtrBtn = ({ workOut }: { workOut: IGymSteps }) => {
   // Get data throug Context API
@@ -11,7 +12,7 @@ const SaveForLtrBtn = ({ workOut }: { workOut: IGymSteps }) => {
   // Button click to action
   const handleSaveForLaterBtn = () => {
     setsaveForLater([...saveForLater, workOut]);
-    alert(`You have save "${workOut.name}" for later.`);
+    toast.success(`You have save "${workOut.name}" for later.`);
   };
 
   return (

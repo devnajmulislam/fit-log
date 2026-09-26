@@ -1,8 +1,24 @@
+"use client";
+
+import React, { useContext } from "react";
 import Image from "next/image";
-import Logo from "@/assets/logo.png";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Logo from "@/assets/logo.png";
+import { WorkoutsContext } from "@/context/WorkoutsProvider";
 
 const Navbar = () => {
+  const context = useContext(WorkoutsContext);
+  const pathname = usePathname();
+
+  // Read lengths with fallback to 0
+  const planCount = context?.todaysPlan?.length || 0;
+  const savedCount = context?.saveForLater?.length || 0;
+
+  // Active and inactive button styles
+  const activeStyle = "bg-[#1e2b0e] text-[#a3e635] font-semibold";
+  const inactiveStyle = "text-gray-300 hover:text-white font-medium";
+
   return (
     <div className="w-full bg-[#0a0a0c] border-b border-gray-800/80">
       <div className="navbar container mx-auto py-3 min-h-0 text-white">
@@ -35,12 +51,26 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow-lg bg-[#141416] border border-gray-800 rounded-xl w-52"
             >
               <li>
-                <Link href="/" className="text-[#a3e635] font-semibold py-2">
+                <Link
+                  href="/"
+                  className={`py-2 ${
+                    pathname === "/"
+                      ? "text-[#a3e635] font-semibold"
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                >
                   Workouts
                 </Link>
               </li>
               <li>
-                <Link href="/my-plan" className="text-gray-300 hover:text-white py-2">
+                <Link
+                  href="/my-plan"
+                  className={`py-2 ${
+                    pathname === "/my-plan"
+                      ? "text-[#a3e635] font-semibold"
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                >
                   My Plan
                 </Link>
               </li>
@@ -68,36 +98,40 @@ const Navbar = () => {
           <div className="flex items-center gap-2">
             <Link
               href="/"
-              className="bg-[#1e2b0e] text-[#a3e635] px-6 py-2 rounded-full font-semibold text-sm transition-colors"
+              className={`px-6 py-2 rounded-full text-sm transition-colors ${
+                pathname === "/" ? activeStyle : inactiveStyle
+              }`}
             >
               Workouts
             </Link>
             <Link
               href="/my-plan"
-              className="text-gray-300 hover:text-white px-6 py-2 rounded-full font-medium text-sm transition-colors"
+              className={`px-6 py-2 rounded-full text-sm transition-colors ${
+                pathname === "/my-plan" ? activeStyle : inactiveStyle
+              }`}
             >
               My Plan
             </Link>
           </div>
         </div>
 
-        {/* Right Section: Counters */}
+        {/* Right Section: Live Counters */}
         <div className="navbar-end flex items-center gap-6">
           {/* Plan Counter */}
-          <div className="flex items-center gap-2 cursor-pointer group">
+          <button className="flex items-center gap-2 cursor-pointer group">
             <span className="text-gray-200 text-sm font-medium">Plan</span>
-            <span className="bg-[#a3e635] text-black text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
-              0
+            <span className="bg-[#a3e635] text-black text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center transition-transform group-hover:scale-105">
+              {planCount}
             </span>
-          </div>
+          </button>
 
           {/* Saved Counter */}
-          <div className="flex items-center gap-2 cursor-pointer group">
+          <button className="flex items-center gap-2 cursor-pointer group">
             <span className="text-gray-300 text-sm font-medium">Saved</span>
-            <span className="border border-gray-600/80 text-gray-400 text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
-              0
+            <span className="border border-gray-600/80 text-gray-300 text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center transition-transform group-hover:scale-105">
+              {savedCount}
             </span>
-          </div>
+          </button>
         </div>
       </div>
     </div>
