@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,7 +11,7 @@ const Navbar = () => {
   const context = useContext(WorkoutsContext);
   const pathname = usePathname();
 
-  // Read lengths with fallback to 0
+  // Set count from todays plan and save for later length
   const planCount = context?.todaysPlan?.length || 0;
   const savedCount = context?.saveForLater?.length || 0;
 
@@ -20,11 +20,12 @@ const Navbar = () => {
   const inactiveStyle = "text-gray-300 hover:text-white font-medium";
 
   return (
-    <div className="w-full bg-[#0a0a0c] border-b border-gray-800/80">
-      <div className="navbar container mx-auto py-3 min-h-0 text-white">
-        {/* Mobile Menu & Logo */}
+    <div className="bg-[#0a0a0c] border-b border-gray-800/80">
+      {/* Navbar parent */}
+      <div className="navbar container mx-auto py-3 text-white">
+        {/* For mobile*/}
         <div className="navbar-start gap-2">
-          {/* Mobile Dropdown */}
+          {/* Dropdown */}
           <div className="dropdown lg:hidden">
             <div
               tabIndex={0}
@@ -77,7 +78,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* Brand Logo & Name */}
+          {/* Nav left*/}
           <Link
             href="/"
             className="flex items-center gap-3 font-extrabold tracking-wider text-xl uppercase text-white"
@@ -93,7 +94,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop navigation Links */}
         <div className="navbar-center hidden lg:flex">
           <div className="flex items-center gap-2">
             <Link
@@ -115,23 +116,23 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Right Section: Live Counters */}
+        {/* Nav right container*/}
         <div className="navbar-end flex items-center gap-6">
-          {/* Plan Counter */}
-          <button className="flex items-center gap-2 cursor-pointer group">
+          {/* Plan counter */}
+          <div className="flex items-center gap-2">
             <span className="text-gray-200 text-sm font-medium">Plan</span>
-            <span className="bg-[#a3e635] text-black text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center transition-transform group-hover:scale-105">
+            <span className="bg-[#a3e635] text-black text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
               {planCount}
             </span>
-          </button>
+          </div>
 
-          {/* Saved Counter */}
-          <button className="flex items-center gap-2 cursor-pointer group">
+          {/* Saved counter */}
+          <div className="flex items-center gap-2">
             <span className="text-gray-300 text-sm font-medium">Saved</span>
-            <span className="border border-gray-600/80 text-gray-300 text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center transition-transform group-hover:scale-105">
+            <span className="border border-gray-600/80 text-gray-300 text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
               {savedCount}
             </span>
-          </button>
+          </div>
         </div>
       </div>
     </div>

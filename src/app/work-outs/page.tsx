@@ -6,7 +6,7 @@ const WorkoutsPage = async () => {
   const gymCards = await getAllGymSteps();
 
   return (
-    <section className="w-full bg-[#0a0a0c] text-white py-10 sm:py-12">
+    <section id="library" className="w-full bg-[#0a0a0c] text-white py-10 sm:py-12">
       {/* Container aligned strictly with Navbar grid */}
       <div className="container mx-auto space-y-8">
         {/* Header Content */}
