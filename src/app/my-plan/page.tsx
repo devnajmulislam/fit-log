@@ -5,27 +5,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { WorkoutsContext } from "@/context/WorkoutsProvider";
 import { IGymSteps, SortOption, TabType } from "@/types/gymSteps.type";
+import { Bounce, toast } from "react-toastify";
 
 const MyPlanPage = () => {
   // get gymsets data
   const context = useContext(WorkoutsContext);
-
+  // prevent fallback
   const todaysPlan: IGymSteps[] = context?.todaysPlan || [];
   const saveForLater: IGymSteps[] = context?.saveForLater || [];
   const removeFromPlan = context?.removeFromPlan || ((id: number) => {});
   const markAsDone = context?.markAsDone || ((id: number) => {});
   const removeFromSaved = context?.removeFromSaved || ((id: number) => {});
 
-  // all stats
+  // all states
   const [activeTab, setActiveTab] = useState<TabType>("todaysPlan");
   const [sortBy, setSortBy] = useState<SortOption>("duration");
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  // show messages
-  const showToast = (msg: string) => {
-    setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3000);
-  };
 
   //  Dynamic live summary
   const metrics = useMemo(() => {
@@ -71,30 +65,74 @@ const MyPlanPage = () => {
   }, [todaysPlan, saveForLater, activeTab, sortBy]);
 
   // Show messages
+  const handleViewDetail = (item: IGymSteps) => {
+    if (markAsDone) markAsDone(item.id);
+    // via toaster
+    toast(`"${item.name}" view detail.`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
+
   const handleMarkAsDone = (item: IGymSteps) => {
     if (markAsDone) markAsDone(item.id);
-    showToast(`"${item.name}" marked as done!`);
+    // via toaster
+    toast.warn(`"${item.name}" marked as done!`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
   };
 
   const handleRemove = (item: IGymSteps) => {
     if (activeTab === "todaysPlan") {
       if (removeFromPlan) removeFromPlan(item.id);
-      showToast(`Removed "${item.name}" from Today's Plan`);
+      // via toaster
+      toast.error(`Removed "${item.name}" from Today's Plan`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     } else {
       if (removeFromSaved) removeFromSaved(item.id);
-      showToast(`Removed "${item.name}" from Saved items`);
+      // via toaster
+      toast.error(`Removed "${item.name}" from Saved items`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 
   return (
     <section className="bg-[#0b0d10] text-white p-4 md:p-10 font-sans relative">
-      {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#a3e635] text-black font-semibold px-4 py-3 rounded-xl shadow-lg border border-black/10">
-          {toastMessage}
-        </div>
-      )}
-
       <div className="container mx-auto space-y-6">
+        {/* top content */}
         <div>
           <h1 className="text-3xl md:text-4xl font-black uppercase font-mono">
             MY PLAN
@@ -107,6 +145,7 @@ const MyPlanPage = () => {
         {/* Stat cards */}
         <div className="border border-gray-800/80 bg-[#12151c] rounded-2xl p-6 shadow-sm">
           <div className="grid grid-cols-3 divide-x divide-gray-800/80">
+            {/* exercies */}
             <div className="flex flex-col gap-1 pl-2">
               <span className="text-xs text-gray-400 font-medium">
                 Exercises
@@ -115,14 +154,14 @@ const MyPlanPage = () => {
                 {metrics.totalExercises}
               </span>
             </div>
-
+            {/* minutes */}
             <div className="flex flex-col gap-1 pl-6">
               <span className="text-xs text-gray-400 font-medium">Minutes</span>
               <span className="text-3xl md:text-4xl font-black text-white tracking-tight font-mono">
                 {metrics.totalMinutes}
               </span>
             </div>
-
+            {/* calories */}
             <div className="flex flex-col gap-1 pl-6">
               <span className="text-xs text-gray-400 font-medium">
                 Calories
@@ -134,8 +173,9 @@ const MyPlanPage = () => {
           </div>
         </div>
 
-        {/* Tabs & Sort header */}
+        {/* Tabs & Sort container */}
         <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+          {/* tabs */}
           <div className="bg-[#12151c] p-1 rounded-xl border border-gray-800/80 inline-flex">
             <button
               onClick={() => setActiveTab("todaysPlan")}
@@ -158,7 +198,7 @@ const MyPlanPage = () => {
               Saved
             </button>
           </div>
-
+          {/* sort by */}
           <div className="flex items-center gap-2">
             <span className="text-xs text-gray-400 font-medium">Sort By</span>
             <div className="relative">
@@ -281,6 +321,7 @@ const MyPlanPage = () => {
                   <Link
                     href={`/work-outs/${item.id}`}
                     className="text-xs font-semibold bg-[#181c24] hover:bg-[#202632] border border-gray-700/60 text-white px-4 py-2 rounded-xl "
+                    onClick={() => handleViewDetail(item)}
                   >
                     View Details
                   </Link>
@@ -288,7 +329,7 @@ const MyPlanPage = () => {
                   {activeTab === "todaysPlan" && (
                     <button
                       onClick={() => handleMarkAsDone(item)}
-                      className="text-xs font-bold bg-[#a3e635] hover:bg-[#8ece25] text-black px-4 py-2 rounded-xl flex items-center gap-1.5 "
+                      className="text-xs font-bold bg-[#a3e635] hover:bg-[#8ece25] text-black px-4 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer "
                     >
                       <svg
                         className="w-3.5 h-3.5 stroke-[3]"
@@ -308,7 +349,7 @@ const MyPlanPage = () => {
 
                   <button
                     onClick={() => handleRemove(item)}
-                    className="p-2 text-gray-500 hover:text-gray-300"
+                    className="p-2 text-gray-500 hover:text-gray-300 cursor-pointer"
                     title="Remove item"
                   >
                     <svg
