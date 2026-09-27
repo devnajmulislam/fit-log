@@ -9,12 +9,14 @@ interface GymCardProps {
 
 const GymCard = ({ gymSteps }: GymCardProps) => {
   return (
+    // Clickable link as parent container to navigate
     <Link href={`/work-outs/${gymSteps.id}`}>
       {" "}
+      {/* Parent */}
       <div className="bg-[#141416] text-white rounded-2xl overflow-hidden border border-gray-800/80 shadow-md mx-1 flex flex-col justify-between">
-        {/* Top Section */}
+        {/* Top section */}
         <div>
-          {/* Card Image */}
+          {/* Card image */}
           <div className="relative h-48 sm:h-52 w-full overflow-hidden">
             <Image
               src={gymSteps.image}
@@ -26,9 +28,9 @@ const GymCard = ({ gymSteps }: GymCardProps) => {
             />
           </div>
 
-          {/* Card Content */}
+          {/* Card content */}
           <div className="p-5 space-y-3">
-            {/* Muscle Badges matching Navbar Active Green */}
+            {/* Muscle badges */}
             <div className="flex flex-wrap gap-2">
               {gymSteps.muscleGroups.map((group, index) => (
                 <span
@@ -52,19 +54,20 @@ const GymCard = ({ gymSteps }: GymCardProps) => {
           </div>
         </div>
 
-        {/* Card Stats Footer */}
+        {/* Card stats footer */}
         <div className="px-5 pb-4">
           <div className="border-t border-gray-800/80 pt-3 flex items-center justify-start gap-5 text-gray-400 text-xs font-medium">
+            {/* time */}
             <div className="flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5 stroke-[2]" />
               <span>{gymSteps.duration} min</span>
             </div>
-
+            {/* calory */}
             <div className="flex items-center gap-1.5">
               <Flame className="w-3.5 h-3.5 stroke-[2]" />
               <span>{gymSteps.caloriesBurned} kcal</span>
             </div>
-
+            {/* rating */}
             <div className="flex items-center gap-1.5">
               <Star className="w-3.5 h-3.5 stroke-[2]" />
               <span>{gymSteps.rating}</span>
