@@ -32,8 +32,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <WorkoutsProvider>
           {/* Nav bar */}
           <Navbar />
-
+          {/* All contents */}
           <div> {children}</div>
+
           {/* Footer */}
           <Footer />
 
