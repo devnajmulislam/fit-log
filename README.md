@@ -71,15 +71,15 @@ The My Plan page provides several useful workout management features. Users can:
 
 Some of the main files and components used in the project:
 
-* `app/layout.tsx` — Main layout, Navbar, Footer, Context Provider and ToastContainer
-* `app/page.tsx` — Home page with Banner and Workout Library
-* `work-outs/page.tsx` — Workout library page
-* `work-outs/[id]/page.tsx` — Dynamic workout details page
-* `my-plan/page.tsx` — Today's Plan and Saved workouts
-* `components/` — Reusable UI components such as Navbar, Footer, GymCard and workout buttons
-* `context/WorkoutsProvider.tsx` — Manages workout plan and saved workout state
-* `lib/gymSteps.ts` — Handles workout data
-* `types/gymSteps.type.ts` — TypeScript types for workout data
+* `app/layout.tsx` - Main layout, Navbar, Footer, Context Provider and ToastContainer
+* `app/page.tsx` - Home page with Banner and Workout Library
+* `work-outs/page.tsx` - Workout library page
+* `work-outs/[id]/page.tsx` - Dynamic workout details page
+* `my-plan/page.tsx` - Today's Plan and Saved workouts
+* `components/` - Reusable UI components such as Navbar, Footer, GymCard and workout buttons
+* `context/WorkoutsProvider.tsx` - Manages workout plan and saved workout state
+* `lib/gymSteps.ts` - Handles workout data
+* `types/gymSteps.type.ts` - TypeScript types for workout data
 
 ## About the Project
 
